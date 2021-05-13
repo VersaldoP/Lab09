@@ -28,10 +28,31 @@ public class FXMLController {
 
     @FXML
     void doCalcolaConfini(ActionEvent event) {
+    	txtResult.clear();
+    	String anno = txtAnno.getText();
+    	try {
+    		int a = Integer.parseInt(anno);
+    		if(a>=1816&&a<=2006) {
+    			model.creaGrafo();
+    			model.caricaGrafo(a);
+//    			txtResult.appendText("il numero di vertici : "+model.getNVertici()+"\n");
+//    			txtResult.appendText("il numero di archi : "+model.getNArchi()+"\n");
+    			txtResult.appendText(model.getComponentiConnesse());
+    			txtResult.appendText(model.getVertici()+"\n");
+    		}
+    		else {
+    			txtResult.setText("Devi inserire un anno compreso tra 1816 e 2006");
+    		}
+    	}
+    	catch(NumberFormatException e ) {
+    		txtResult.setText("Hai inserito l'anno in un formato non corretto");
 
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+   
+	}
+
+	@FXML // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
         assert txtAnno != null : "fx:id=\"txtAnno\" was not injected: check your FXML file 'Scene.fxml'.";
         assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'Scene.fxml'.";
